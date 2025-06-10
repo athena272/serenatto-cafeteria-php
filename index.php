@@ -1,56 +1,19 @@
 <?php
-$cafeProducts = [
-    [
-        'name' => "Creamy Coffee",
-        'description' => "Irresistibly smooth creamy coffee that delights your palate",
-        'price' => "5.00",
-        'image' => "img/cafe-cremoso.jpg"
-    ],
-    [
-        'name' => "Coffee with Milk",
-        'description' => "The harmony of coffee and milk, a comforting experience",
-        'price' => "2.00",
-        'image' => "img/cafe-com-leite.jpg"
-    ],
-    [
-        'name' => "Cappuccino",
-        'description' => "Smooth coffee, creamy milk, and a touch of sweet flavor",
-        'price' => "7.00",
-        'image' => "img/cappuccino.jpg"
-    ],
-    [
-        'name' => "Iced Coffee",
-        'description' => "Refreshing iced coffee, sweetened and with subtle hints of vanilla or caramel.",
-        'price' => "3.00",
-        'image' => "img/cafe-gelado.jpg"
-    ]
-];
-$lunchProducts = [
-    [
-        "name" => "Steak",
-        "description" => "Steak, rice with beans, and delicious French fries",
-        "price" => "27.90",
-        "image" => "img/bife.jpg"
-    ],
-    [
-        "name" => "Fish Fillet",
-        "description" => "Baked salmon fillet, rice, green beans, and tomato",
-        "price" => "24.99",
-        "image" => "img/prato-peixe.jpg"
-    ],
-    [
-        "name" => "Chicken",
-        "description" => "Delicious breaded chicken with French fries, cabbage salad, and spicy sauce",
-        "price" => "23.00",
-        "image" => "img/prato-frango.jpg"
-    ],
-    [
-        "name" => "Fettuccine",
-        "description" => "Authentic Italian fettuccine pasta with grilled chicken breast",
-        "price" => "22.50",
-        "image" => "img/fettuccine.jpg"
-    ]
-];
+
+/** @var PDO $pdo */
+$pdo = require __DIR__ . '/src/Database/db-connection.php';
+
+function fetchProductsByCategory(PDO $pdo, string $category): array
+{
+    $statement = $pdo->prepare('SELECT name, description, price, image FROM products WHERE type = :category');
+    $statement->bindValue(':category', $category);
+    //$stmt->execute(['category' => $category]);
+    $statement->execute();
+    return $statement->fetchAll(PDO::FETCH_ASSOC);
+}
+
+$cafeProducts = fetchProductsByCategory($pdo, 'Coffee');
+$lunchProducts = fetchProductsByCategory($pdo, 'Lunch');
 ?>
 
 <!doctype html>
@@ -87,7 +50,7 @@ $lunchProducts = [
             <?php foreach ($cafeProducts as $product): ?>
                 <div class="container-produto">
                     <div class="container-foto">
-                        <img src="<?= $product['image'] ?>" alt="<?= $product['name'] ?>">
+                        <img src="img/<?= $product['image'] ?>" alt="<?= $product['name'] ?>">
                     </div>
                     <p><?= $product['name'] ?></p>
                     <p><?= $product['description'] ?></p>
@@ -105,7 +68,7 @@ $lunchProducts = [
             <?php foreach ($lunchProducts as $product): ?>
                 <div class="container-produto">
                     <div class="container-foto">
-                        <img src="<?= $product['image'] ?>" alt="<?= $product['name'] ?>">
+                        <img src="img/<?= $product['image'] ?>" alt="<?= $product['name'] ?>">
                     </div>
                     <p><?= $product['name'] ?></p>
                     <p><?= $product['description'] ?></p>
