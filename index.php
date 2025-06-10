@@ -5,7 +5,7 @@ $pdo = require __DIR__ . '/src/Database/db-connection.php';
 
 function fetchProductsByCategory(PDO $pdo, string $category): array
 {
-    $statement = $pdo->prepare('SELECT name, description, price, image FROM products WHERE type = :category');
+    $statement = $pdo->prepare('SELECT name, description, price, image FROM products WHERE type = :category ORDER BY price');
     $statement->bindValue(':category', $category);
     //$stmt->execute(['category' => $category]);
     $statement->execute();
