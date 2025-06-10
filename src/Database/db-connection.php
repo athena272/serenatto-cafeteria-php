@@ -1,8 +1,14 @@
 <?php
 
-require_once __DIR__ . '/../vendor/autoload.php';
+namespace Athena272\SerenattoCafeteria\Database;
 
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+use Dotenv;
+use PDO;
+use PDOException;
+
+require_once __DIR__ . '/../../vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/serenatto-cafeteria-php/');
 $dotenv->load();
 
 $host = $_ENV['DB_HOST'];
