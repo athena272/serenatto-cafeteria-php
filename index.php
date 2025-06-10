@@ -1,6 +1,12 @@
 <?php
 $cafeProducts = [
     [
+        'name' => "Creamy Coffee",
+        'description' => "Irresistibly smooth creamy coffee that delights your palate",
+        'price' => "5.00",
+        'image' => "img/cafe-cremoso.jpg"
+    ],
+    [
         'name' => "Coffee with Milk",
         'description' => "The harmony of coffee and milk, a comforting experience",
         'price' => "2.00",
