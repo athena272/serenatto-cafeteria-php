@@ -1,5 +1,19 @@
 {
+    "name": "guilh/serenatto-cafeteria-php",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Athena272\\SerenattoCafeteria\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "athena272",
+            "email": "guilhermera272@gmail.com"
+        }
+    ],
     "require": {
-        "vlucas/phpdotenv": "^5.6"
+        "vlucas/phpdotenv": "^5.6",
+      "ext-pdo": "*"
     }
 }
