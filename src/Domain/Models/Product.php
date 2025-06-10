@@ -1,4 +1,7 @@
 <?php
+
+namespace Athena272\SerenattoCafeteria\Domain\Models;
+
 class Product
 {
     private int $id;
