@@ -66,11 +66,11 @@ $lunchProducts = fetchProductsByCategory($pdo, 'Lunch');
             <?php foreach ($cafeProducts as $product): ?>
                 <div class="container-produto">
                     <div class="container-foto">
-                        <img src="img/<?= $product->getImage() ?>" alt="<?= $product->getName() ?>">
+                        <img src="<?= $product->getImagePath() ?>" alt="<?= $product->getName() ?>">
                     </div>
                     <p><?= $product->getName() ?></p>
                     <p><?= $product->getDescription() ?></p>
-                    <p><?= "R$ " . number_format($product->getPrice(), 2) ?></p>
+                    <p><?= $product->getFormattedPrice() ?></p>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -84,11 +84,11 @@ $lunchProducts = fetchProductsByCategory($pdo, 'Lunch');
             <?php foreach ($lunchProducts as $product): ?>
                 <div class="container-produto">
                     <div class="container-foto">
-                        <img src="img/<?= $product->getImage() ?>" alt="<?= $product->getName() ?>">
+                        <img src="<?= $product->getImagePath() ?>" alt="<?= $product->getName() ?>">
                     </div>
                     <p><?= $product->getName() ?></p>
                     <p><?= $product->getDescription() ?></p>
-                    <p><?= "R$ " . number_format($product->getPrice(), 2) ?></p>
+                    <p><?= $product->getFormattedPrice() ?></p>
                 </div>
             <?php endforeach; ?>
         </div>
