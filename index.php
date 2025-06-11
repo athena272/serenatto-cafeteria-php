@@ -1,15 +1,31 @@
 <?php
 
+use Athena272\SerenattoCafeteria\Domain\Models\Product;
+
 /** @var PDO $pdo */
 $pdo = require __DIR__ . '/src/Database/db-connection.php';
 
+
 function fetchProductsByCategory(PDO $pdo, string $category): array
 {
-    $statement = $pdo->prepare('SELECT name, description, price, image FROM products WHERE type = :category ORDER BY price');
+    $statement = $pdo->prepare('SELECT id, type, name, description, price, image FROM products WHERE type = :category ORDER BY price');
     $statement->bindValue(':category', $category);
-    //$stmt->execute(['category' => $category]);
     $statement->execute();
-    return $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    $products = [];
+
+    while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+        $products[] = new Product(
+            $row['id'],
+            $row['type'],
+            $row['name'],
+            $row['description'],
+            $row['image'],
+            $row['price'],
+        );
+    }
+
+    return $products;
 }
 
 $cafeProducts = fetchProductsByCategory($pdo, 'Coffee');
@@ -50,11 +66,11 @@ $lunchProducts = fetchProductsByCategory($pdo, 'Lunch');
             <?php foreach ($cafeProducts as $product): ?>
                 <div class="container-produto">
                     <div class="container-foto">
-                        <img src="img/<?= $product['image'] ?>" alt="<?= $product['name'] ?>">
+                        <img src="img/<?= $product->getImage() ?>" alt="<?= $product->getName() ?>">
                     </div>
-                    <p><?= $product['name'] ?></p>
-                    <p><?= $product['description'] ?></p>
-                    <p><?= "R$ " . $product['price'] ?></p>
+                    <p><?= $product->getName() ?></p>
+                    <p><?= $product->getDescription() ?></p>
+                    <p><?= "R$ " . number_format($product->getPrice(), 2) ?></p>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -68,11 +84,11 @@ $lunchProducts = fetchProductsByCategory($pdo, 'Lunch');
             <?php foreach ($lunchProducts as $product): ?>
                 <div class="container-produto">
                     <div class="container-foto">
-                        <img src="img/<?= $product['image'] ?>" alt="<?= $product['name'] ?>">
+                        <img src="img/<?= $product->getImage() ?>" alt="<?= $product->getName() ?>">
                     </div>
-                    <p><?= $product['name'] ?></p>
-                    <p><?= $product['description'] ?></p>
-                    <p><?= "R$ " . $product['price'] ?></p>
+                    <p><?= $product->getName() ?></p>
+                    <p><?= $product->getDescription() ?></p>
+                    <p><?= "R$ " . number_format($product->getPrice(), 2) ?></p>
                 </div>
             <?php endforeach; ?>
         </div>
