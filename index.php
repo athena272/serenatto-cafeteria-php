@@ -1,35 +1,15 @@
 <?php
 
-use Athena272\SerenattoCafeteria\Domain\Models\Product;
+require_once 'vendor/autoload.php';
 
-/** @var PDO $pdo */
-$pdo = require __DIR__ . '/src/Database/db-connection.php';
+use Athena272\SerenattoCafeteria\Database\ConnectionCreator;
+use Athena272\SerenattoCafeteria\Infrastructure\Repository\PdoProductRepository;
 
+$pdo = ConnectionCreator::createConnection();
+$repository = new PdoProductRepository($pdo);
 
-function fetchProductsByCategory(PDO $pdo, string $category): array
-{
-    $statement = $pdo->prepare('SELECT id, type, name, description, price, image FROM products WHERE type = :category ORDER BY price');
-    $statement->bindValue(':category', $category);
-    $statement->execute();
-
-    $products = [];
-
-    while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
-        $products[] = new Product(
-            $row['id'],
-            $row['type'],
-            $row['name'],
-            $row['description'],
-            $row['image'],
-            $row['price'],
-        );
-    }
-
-    return $products;
-}
-
-$cafeProducts = fetchProductsByCategory($pdo, 'Coffee');
-$lunchProducts = fetchProductsByCategory($pdo, 'Lunch');
+$cafeProducts = $repository->fetchProductsByCategory('Coffee');
+$lunchProducts = $repository->fetchProductsByCategory('Lunch');
 ?>
 
 <!doctype html>
