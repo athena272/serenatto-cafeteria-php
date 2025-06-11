@@ -55,4 +55,13 @@ class Product
     {
         return $this->price;
     }
+    public function getFormattedPrice(): string
+    {
+        return "R$ " . number_format($this->price, 2);
+    }
+
+    public function getImagePath(): string
+    {
+        return "img/" . $this->image;
+    }
 }
