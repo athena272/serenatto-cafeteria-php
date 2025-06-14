@@ -36,4 +36,23 @@ class PdoProductRepository implements ProductRepositoryInterface
 
         return $products;
     }
+
+    public function fetchAllProducts(): array
+    {
+        $statement = $this->connection->query('SELECT id, type, name, description, price, image FROM products ORDER BY type, name');
+        $products = [];
+
+        while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+            $products[] = new Product(
+                $row['id'],
+                $row['type'],
+                $row['name'],
+                $row['description'],
+                $row['image'],
+                $row['price']
+            );
+        }
+
+        return $products;
+    }
 }
