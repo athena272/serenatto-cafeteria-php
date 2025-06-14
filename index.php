@@ -46,15 +46,16 @@ $lunchProducts = $repository->fetchProductsByCategory('Lunch');
             <?php foreach ($cafeProducts as $product): ?>
                 <div class="container-produto">
                     <div class="container-foto">
-                        <img src="<?= $product->getImagePath() ?>" alt="<?= $product->getName() ?>">
+                        <img src="<?= htmlspecialchars($product->getImagePath()) ?>" alt="<?= htmlspecialchars($product->getName()) ?>">
                     </div>
-                    <p><?= $product->getName() ?></p>
-                    <p><?= $product->getDescription() ?></p>
+                    <p><?= htmlspecialchars($product->getName()) ?></p>
+                    <p><?= htmlspecialchars($product->getDescription()) ?></p>
                     <p><?= $product->getFormattedPrice() ?></p>
                 </div>
             <?php endforeach; ?>
         </div>
     </section>
+
     <section class="container-almoco">
         <div class="container-almoco-titulo">
             <h3>Lunch Options</h3>
@@ -64,10 +65,10 @@ $lunchProducts = $repository->fetchProductsByCategory('Lunch');
             <?php foreach ($lunchProducts as $product): ?>
                 <div class="container-produto">
                     <div class="container-foto">
-                        <img src="<?= $product->getImagePath() ?>" alt="<?= $product->getName() ?>">
+                        <img src="<?= htmlspecialchars($product->getImagePath()) ?>" alt="<?= htmlspecialchars($product->getName()) ?>">
                     </div>
-                    <p><?= $product->getName() ?></p>
-                    <p><?= $product->getDescription() ?></p>
+                    <p><?= htmlspecialchars($product->getName()) ?></p>
+                    <p><?= htmlspecialchars($product->getDescription()) ?></p>
                     <p><?= $product->getFormattedPrice() ?></p>
                 </div>
             <?php endforeach; ?>
