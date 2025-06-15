@@ -39,7 +39,7 @@ class PdoProductRepository implements ProductRepositoryInterface
 
     public function fetchAllProducts(): array
     {
-        $statement = $this->connection->query('SELECT id, type, name, description, price, image FROM products ORDER BY type, name');
+        $statement = $this->connection->query('SELECT id, type, name, description, price, image FROM products ORDER BY price');
         $products = [];
 
         while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
