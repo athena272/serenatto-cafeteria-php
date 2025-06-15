@@ -55,4 +55,11 @@ class PdoProductRepository implements ProductRepositoryInterface
 
         return $products;
     }
+
+    public function deleteProductById(int $id): void
+    {
+        $statement = $this->connection->prepare('DELETE FROM products WHERE id = :id');
+        $statement->bindValue(':id', $id, PDO::PARAM_INT);
+        $statement->execute();
+    }
 }
