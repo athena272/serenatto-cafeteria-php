@@ -57,7 +57,7 @@ $allProducts = $repository->fetchAllProducts();
                     <td><?= $product->getFormattedPrice() ?></td>
                     <td><a class="botao-editar" href="editar-produto.php?id=<?= $product->getId() ?>">Editar</a></td>
                     <td>
-                        <form action="excluir-produto.php" method="post">
+                        <form action="delete-product.php" method="post">
                             <input type="hidden" name="id" value="<?= $product->getId() ?>">
                             <input type="submit" class="botao-excluir" value="Excluir">
                         </form>
