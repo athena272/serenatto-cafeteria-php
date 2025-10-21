@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 require_once 'vendor/autoload.php';
 
@@ -26,8 +27,10 @@ try {
 
     $repository->deleteProductById($id);
 
+    $_SESSION['flash_message'] = "Produto excluído com sucesso!";
     header('Location: admin.php');
     exit;
 } catch (Exception $e) {
+    $_SESSION['flash_message'] = "Erro ao excluir produto: " . $e->getMessage();
     echo "Erro ao excluir produto: " . $e->getMessage();
 }
