@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once 'vendor/autoload.php';
 
 use Athena272\SerenattoCafeteria\Database\ConnectionCreator;
@@ -30,6 +31,12 @@ $allProducts = $repository->fetchAllProducts();
 </head>
 <body>
 <main>
+    <?php if (isset($_SESSION['flash_message'])): ?>
+        <div class="flash-message">
+            <?= htmlspecialchars($_SESSION['flash_message']) ?>
+        </div>
+        <?php unset($_SESSION['flash_message']); ?>
+    <?php endif; ?>
     <section class="container-admin-banner">
         <img src="img/logo-serenatto-horizontal.png" class="logo-admin" alt="logo-serenatto">
         <h1>Admistração Serenatto</h1>
