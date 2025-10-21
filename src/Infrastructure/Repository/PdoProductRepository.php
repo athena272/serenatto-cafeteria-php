@@ -17,7 +17,8 @@ class PdoProductRepository implements ProductRepositoryInterface
 
     function fetchProductsByCategory(string $category): array
     {
-        $statement = $this->connection->prepare('SELECT id, type, name, description, price, image FROM products WHERE type = :category ORDER BY price');
+        $sql = "SELECT id, type, name, description, price, image FROM products WHERE type = :category ORDER BY price";
+        $statement = $this->connection->prepare($sql);
         $statement->bindValue(':category', $category);
         $statement->execute();
 
@@ -39,7 +40,8 @@ class PdoProductRepository implements ProductRepositoryInterface
 
     public function fetchAllProducts(): array
     {
-        $statement = $this->connection->query('SELECT id, type, name, description, price, image FROM products ORDER BY price');
+        $sql = "SELECT id, type, name, description, price, image FROM products ORDER BY price";
+        $statement = $this->connection->query($sql);
         $products = [];
 
         while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
@@ -58,8 +60,21 @@ class PdoProductRepository implements ProductRepositoryInterface
 
     public function deleteProductById(int $id): void
     {
-        $statement = $this->connection->prepare('DELETE FROM products WHERE id = :id');
+        $sql = "DELETE FROM products WHERE id = :id";
+        $statement = $this->connection->prepare($sql);
         $statement->bindValue(':id', $id, PDO::PARAM_INT);
+        $statement->execute();
+    }
+
+    public function insertProduct(Product $product): void
+    {
+        $sql = "INSERT INTO products (type, name, description, price, image) VALUES (:type, :name, :description, :price, :image)";
+        $statement = $this->connection->prepare($sql);
+        $statement->bindValue(':type', $product->getType());
+        $statement->bindValue(':name', $product->getName());
+        $statement->bindValue(':description', $product->getDescription());
+        $statement->bindValue(':price', $product->getPrice());
+        $statement->bindValue(':image', $product->getImage());
         $statement->execute();
     }
 }
