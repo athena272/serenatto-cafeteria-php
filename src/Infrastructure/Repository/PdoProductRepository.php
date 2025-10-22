@@ -77,4 +77,41 @@ class PdoProductRepository implements ProductRepositoryInterface
         $statement->bindValue(':image', $product->getImage());
         $statement->execute();
     }
+
+    public function fetchProductById(int $id): ?Product
+    {
+        $sql = "SELECT id, type, name, description, price, image FROM products WHERE id = :id";
+        $statement = $this->connection->prepare($sql);
+        $statement->bindValue(':id', $id, PDO::PARAM_INT);
+        $statement->execute();
+
+        $row = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if (!$row) {
+            return null;
+        }
+
+        return new Product(
+            $row['id'],
+            $row['type'],
+            $row['name'],
+            $row['description'],
+            $row['image'],
+            $row['price']
+        );
+    }
+
+    public function updateProduct(Product $product): void
+    {
+        $sql = "UPDATE products SET type = :type, name = :name, description = :description, price = :price, image = :image WHERE id = :id";
+
+        $statement = $this->connection->prepare($sql);
+        $statement->bindValue(':type', $product->getType());
+        $statement->bindValue(':name', $product->getName());
+        $statement->bindValue(':description', $product->getDescription());
+        $statement->bindValue(':price', $product->getPrice());
+        $statement->bindValue(':image', $product->getImage());
+        $statement->bindValue(':id', $product->getId(), PDO::PARAM_INT);
+        $statement->execute();
+    }
 }
