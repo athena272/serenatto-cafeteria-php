@@ -12,7 +12,7 @@ $allProducts = $repository->fetchAllProducts();
 ?>
 
 <!doctype html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -38,21 +38,22 @@ $allProducts = $repository->fetchAllProducts();
         <?php unset($_SESSION['flash_message']); ?>
     <?php endif; ?>
     <section class="container-admin-banner">
-        <img src="img/logo-serenatto-horizontal.png" class="logo-admin" alt="logo-serenatto">
-        <h1>Admistração Serenatto</h1>
+        <img src="img/logo-serenatto-horizontal.png" class="logo-admin" alt="serenatto-logo">
+        <h1>Serenatto Administration</h1>
         <img class="ornaments" src="img/ornaments-coffee.png" alt="ornaments">
     </section>
-    <h2>Lista de Produtos</h2>
+
+    <h2>Product List</h2>
 
     <section class="container-table">
         <table>
             <thead>
             <tr>
-                <th>Produto</th>
-                <th>Tipo</th>
-                <th>Descricão</th>
-                <th>Valor</th>
-                <th colspan="2">Ação</th>
+                <th>Product</th>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th colspan="2">Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -62,20 +63,21 @@ $allProducts = $repository->fetchAllProducts();
                     <td><?= htmlspecialchars($product->getType()) ?></td>
                     <td><?= htmlspecialchars($product->getDescription()) ?></td>
                     <td><?= $product->getFormattedPrice() ?></td>
-                    <td><a class="botao-editar" href="editar-produto.php?id=<?= $product->getId() ?>">Editar</a></td>
+                    <td><a class="botao-editar" href="edit-product.php?id=<?= $product->getId() ?>">Edit</a></td>
                     <td>
                         <form action="delete-product.php" method="post">
                             <input type="hidden" name="id" value="<?= $product->getId() ?>">
-                            <input type="submit" class="botao-excluir" value="Excluir">
+                            <input type="submit" class="botao-excluir" value="Delete">
                         </form>
                     </td>
                 </tr>
             <?php endforeach; ?>
             </tbody>
         </table>
-        <a class="botao-cadastrar" href="create-product.php">Cadastrar produto</a>
+
+        <a class="botao-cadastrar" href="create-product.php">Add Product</a>
         <form action="#" method="post">
-            <input type="submit" class="botao-cadastrar" value="Baixar Relatório"/>
+            <input type="submit" class="botao-cadastrar" value="Download Report"/>
         </form>
     </section>
 </main>
