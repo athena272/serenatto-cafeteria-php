@@ -1,4 +1,3 @@
-var preco = $('#preco').maskMoney()
 var price = $('#price').maskMoney({
     prefix: 'R$ ',
     allowNegative: false,
@@ -6,3 +5,6 @@ var price = $('#price').maskMoney({
     decimal: ',',
     affixesStay: true
 });
+
+// Força a aplicação da máscara no valor atual
+price.maskMoney('mask');
