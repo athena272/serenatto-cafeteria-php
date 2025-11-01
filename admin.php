@@ -76,9 +76,9 @@ $allProducts = $repository->fetchAllProducts();
         </table>
 
         <a class="botao-cadastrar" href="create-product.php">Add Product</a>
-        <form action="#" method="post">
+        <form action="generate-report.php" method="get" target="_blank">
             <input type="submit" class="botao-cadastrar" value="Download Report"/>
-        </form>
+        </form
     </section>
 </main>
 </body>
