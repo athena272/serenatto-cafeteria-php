@@ -2,6 +2,12 @@
 
 Sistema web desenvolvido em PHP para gerenciamento e exibição de cardápio digital de uma cafeteria. O projeto permite visualizar produtos organizados por categorias (Cafés e Almoços) e oferece um painel administrativo completo para gerenciar produtos.
 
+<img width="1557" height="853" alt="image" src="https://github.com/user-attachments/assets/4c0f3d73-c819-46b9-ba99-f3f1b9cca15c" />
+
+<img width="1712" height="897" alt="image" src="https://github.com/user-attachments/assets/3175ad35-3a76-42c6-aad1-2fcf1bd12dda" />
+
+<img width="1787" height="806" alt="image" src="https://github.com/user-attachments/assets/3cd282b3-e069-40c7-a0bc-fd7fd9744edc" />
+
 ## 📋 Índice
 
 - [Características](#-características)
