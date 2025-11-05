@@ -1,6 +1,6 @@
 php -S localhost:8080
 
-http://localhost:8080/cadastrar-produto.php
+http://localhost:8080/create-product.php
 
 http://localhost:8080/admin.php
 
